@@ -11,14 +11,14 @@ import {
   Form,
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import {
   listProductDetails,
   createProductReview,
 } from '../actions/productActions';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
-import Meta from '../components/Meta';
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -26,6 +26,7 @@ const ProductScreen = ({ history, match }) => {
   const [comment, setComment] = useState('');
 
   const dispatch = useDispatch();
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
@@ -35,18 +36,21 @@ const ProductScreen = ({ history, match }) => {
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
     success: successProductReview,
+    loading: loadingProductReview,
     error: errorProductReview,
   } = productReviewCreate;
+
   useEffect(() => {
     if (successProductReview) {
       setRating(0);
       setComment('');
+      dispatch(listProductDetails(match.params.id));
     }
     if (!product._id || product._id !== match.params.id) {
       dispatch(listProductDetails(match.params.id));
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, successProductReview]);
+  }, [dispatch, match, successProductReview, product]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -54,7 +58,12 @@ const ProductScreen = ({ history, match }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createProductReview(match.params.id, { rating, comment }));
+    dispatch(
+      createProductReview(match.params.id, {
+        rating,
+        comment,
+      })
+    );
   };
 
   return (
@@ -148,7 +157,6 @@ const ProductScreen = ({ history, match }) => {
               </Card>
             </Col>
           </Row>
-
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>
@@ -167,6 +175,12 @@ const ProductScreen = ({ history, match }) => {
                   ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
+                  {successProductReview && (
+                    <Message variant='success'>
+                      Review submitted successfully
+                    </Message>
+                  )}
+                  {loadingProductReview && <Loader />}
                   {errorProductReview && (
                     <Message variant='danger'>{errorProductReview}</Message>
                   )}
@@ -196,17 +210,17 @@ const ProductScreen = ({ history, match }) => {
                           onChange={(e) => setComment(e.target.value)}
                         ></Form.Control>
                       </Form.Group>
-                      <Button type='submit' variant='primary'>
+                      <Button
+                        disabled={loadingProductReview}
+                        type='submit'
+                        variant='primary'
+                      >
                         Submit
                       </Button>
                     </Form>
                   ) : (
                     <Message>
-                      Please{' '}
-                      <Link to='/login' style={{ color: 'red' }}>
-                        <strong>sign in</strong>
-                      </Link>{' '}
-                      to write a review
+                      Please <Link to='/login'>sign in</Link> to write a review{' '}
                     </Message>
                   )}
                 </ListGroup.Item>
