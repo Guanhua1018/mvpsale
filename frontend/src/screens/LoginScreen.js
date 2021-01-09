@@ -28,6 +28,14 @@ const LoginScreen = ({ location, history }) => {
     dispatch(login(email, password));
   };
 
+  const demoLoginHandler = () => {
+    dispatch(login('john@example.com', '123456'));
+  };
+
+  const demoLoginAsAdminHandler = () => {
+    dispatch(login('admin@example.com', '123456'));
+  };
+
   return (
     <FormContainer>
       <h1>Sign In</h1>
@@ -67,6 +75,17 @@ const LoginScreen = ({ location, history }) => {
           <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
             Register
           </Link>
+        </Col>
+      </Row>
+
+      <Row className='py-3'>
+        <Col>
+          <Button onClick={demoLoginHandler}>Demo Login</Button>
+        </Col>
+      </Row>
+      <Row className='py-3'>
+        <Col>
+          <Button onClick={demoLoginAsAdminHandler}>Demo Login as Admin</Button>
         </Col>
       </Row>
     </FormContainer>
