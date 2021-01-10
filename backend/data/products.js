@@ -1,5 +1,76 @@
 const products = [
   {
+    name: 'Cherry MX 8.0',
+    image: '/images/cherry-mx8.0.jpg',
+    description:
+      'Complete n-key rollover and anti-ghosting make them unbeatable in every game.',
+    brand: 'Cherry',
+    category: 'Electronics',
+    price: 229.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 18,
+  },
+  {
+    name: 'Logitech G PRO',
+    image: '/images/gpro.jpg',
+    description:
+      'PRO Wireless was designed to be the ultimate gaming mouse for esports professionals.',
+    brand: 'Logitech',
+    category: 'Electronics',
+    price: 169.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 19,
+  },
+  {
+    name: 'Apple Homepod mini',
+    image: '/images/homepod-mini.jpg',
+    description: 'Control your smart home. Private and secure.',
+    brand: 'Apple',
+    category: 'Electronics',
+    price: 159.99,
+    countInStock: 0,
+    rating: 4.5,
+    numReviews: 5,
+  },
+  {
+    name: 'Keychron K2 version 2',
+    image: '/images/keychron-k2.jpg',
+    description: 'THE BEST COMBINATION OF FULL-SIZED AND TENKEYLESS KEYBOARD',
+    brand: 'Keychron',
+    category: 'Electronics',
+    price: 149.99,
+    countInStock: 0,
+    rating: 2,
+    numReviews: 24,
+  },
+  {
+    name: 'Benq ScreenBar Plus',
+    image: '/images/screenbar.jpg',
+    description:
+      'Dimming and Hue Adjustment, No Screen Glare, Space Saving, Matte Black, USB Powered (ScreenBar Plus_Silver)',
+    brand: 'Benq',
+    category: 'Electronics',
+    price: 311.99,
+    countInStock: 0,
+    rating: 3,
+    numReviews: 10,
+  },
+  {
+    name: 'LG Ultrafine 4k display',
+    image: '/images/ultrafine.jpg',
+    description:
+      'LG 24MD4KL offers stunning UHD display, over 8 million pixels, quality versatilety. While you are viewing or editing images and watching videos with your mac, this high performance monitor delivers immaculate 4K resolution.',
+    brand: 'LG',
+    category: 'Electronics',
+    price: 29.99,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+  },
+
+  {
     name: 'Airpods Wireless Bluetooth Headphones',
     image: '/images/airpods.jpg',
     description:
