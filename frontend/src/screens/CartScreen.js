@@ -79,7 +79,7 @@ const CartScreen = ({ match, location, history }) => {
                       variant='light'
                       onClick={() => removeFormCartHandler(item.product)}
                     >
-                      <i className='fas fa-trash'></i>
+                      <i className='fas fa-trash'/>
                     </Button>
                   </Col>
                 </Row>
